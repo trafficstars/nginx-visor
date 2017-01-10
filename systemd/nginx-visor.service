@@ -1,0 +1,16 @@
+[Unit]
+Description=Nginx service discovery agent
+           
+[Service]
+Type=simple
+Environment=REGISTRY_DSN="http://192.168.20.48:8500?dc=dc1&refresh_interval=5"
+Environment=TEMPLATES_DIR=/etc/nginx-visor/templates/
+Environment=NGINX_CONF_DIR=/etc/nginx/conf.d/
+Environment=NGINX_RELOAD_CMD="service nginx reload"
+Environment=NGINX_TEST_CMD="/usr/local/sbin/nginx -t"
+Environment=LOG_LEVEL=error
+ExecStart=/usr/bin/nginx-visor
+Restart=always
+           
+[Install]
+WantedBy=default.target

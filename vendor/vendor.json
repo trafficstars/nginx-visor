@@ -1,0 +1,52 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "htjvdG/znrHmFYRQBqA2vHrJsF4=",
+			"path": "github.com/Sirupsen/logrus",
+			"revision": "f3cfb454f4c209e6668c95216c4744b8fddb2356",
+			"revisionTime": "2016-06-01T11:32:10Z"
+		},
+		{
+			"checksumSHA1": "WjBZSW7p3FYbAMPHQf8JT4QbBPc=",
+			"path": "github.com/flosch/pongo2",
+			"revision": "22499f94d3d56c7238591344a6902715d0b8fbbf",
+			"revisionTime": "2016-08-13T17:05:23Z"
+		},
+		{
+			"checksumSHA1": "hFd/kz4QS8EXphfImCvmKhAa04Y=",
+			"origin": "github.com/trafficstars/registry/vendor/github.com/hashicorp/consul/api",
+			"path": "github.com/hashicorp/consul/api",
+			"revision": "585159391d71eef4e5651fc82d3afd274671909e",
+			"revisionTime": "2017-01-05T15:12:25Z"
+		},
+		{
+			"checksumSHA1": "ywmSZP6nx/ZFWYNmB6hsfHmiWIc=",
+			"origin": "github.com/trafficstars/registry/vendor/github.com/hashicorp/consul/vendor/github.com/hashicorp/go-cleanhttp",
+			"path": "github.com/hashicorp/go-cleanhttp",
+			"revision": "585159391d71eef4e5651fc82d3afd274671909e",
+			"revisionTime": "2017-01-05T15:12:25Z"
+		},
+		{
+			"checksumSHA1": "RCuIHt9cqgTHyJ3cUiG/NS7Vc9E=",
+			"origin": "github.com/trafficstars/registry/vendor/github.com/hashicorp/consul/vendor/github.com/hashicorp/serf/coordinate",
+			"path": "github.com/hashicorp/serf/coordinate",
+			"revision": "585159391d71eef4e5651fc82d3afd274671909e",
+			"revisionTime": "2017-01-05T15:12:25Z"
+		},
+		{
+			"checksumSHA1": "8YYkB7b0TS7YQudY7VUMVMZ16h0=",
+			"path": "github.com/trafficstars/registry",
+			"revision": "585159391d71eef4e5651fc82d3afd274671909e",
+			"revisionTime": "2017-01-05T15:12:25Z"
+		},
+		{
+			"checksumSHA1": "8fD/im5Kwvy3JgmxulDTambmE8w=",
+			"path": "golang.org/x/sys/unix",
+			"revision": "a646d33e2ee3172a661fc09bca23bb4889a41bc8",
+			"revisionTime": "2016-07-15T05:43:45Z"
+		}
+	],
+	"rootPath": "github.com/trafficstars/nginx-visor"
+}
