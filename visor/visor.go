@@ -103,15 +103,15 @@ func (v *visor) makeConfig(service string, servers []server) error {
 		template = filepath.Join(environment["TEMPLATES_DIR"], service+".tpl")
 	)
 
-	cnf, err := os.OpenFile(config, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0755)
+	tpl, err := pongo2.FromFile(template)
 	if err != nil {
-		log.Errorf("Could not open configuration file [%s]: %v", config, err)
+		log.Warnf("Could not open template file [%s]: %v", template, err)
 		return err
 	}
 
-	tpl, err := pongo2.FromFile(template)
+	cnf, err := os.OpenFile(config, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0755)
 	if err != nil {
-		log.Errorf("Could not open template file [%s]: %v", template, err)
+		log.Errorf("Could not open configuration file [%s]: %v", config, err)
 		return err
 	}
 
