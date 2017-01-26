@@ -32,6 +32,7 @@ func Run() error {
 			log.Infof("Use default value [%s]: %s", k, v)
 		}
 	}
+	log.Infof("Registry DSN: %s", environment["REGISTRY_DSN"])
 	registry, err := registry.New(environment["REGISTRY_DSN"], []string{})
 	if err != nil {
 		return err
@@ -54,16 +55,18 @@ func (v *visor) check() {
 		log.Errorf("Lookup: %v", err)
 		return
 	}
-	log.Debug("Lookup: OK")
+	log.Debug("Lookup: %d item(s)", len(items))
 	services := make(map[string][]server)
 	for _, item := range items {
 		if item.Status == registry.SERVICE_STATUS_PASSING {
+			log.Debugf("[%s] append: address=%s, port=%d, weight=%d", item.Name, item.Address, item.Port, serverWeight(&item))
 			services[item.Name] = append(services[item.Name], server{
 				Host:   item.Address,
 				Port:   item.Port,
 				Weight: serverWeight(&item),
 			})
 		} else {
+			log.Debugf("[%s] backup: address=%s, port=%d", item.Name, item.Address, item.Port)
 			services[item.Name] = append(services[item.Name], server{
 				Host:   item.Address,
 				Port:   item.Port,
