@@ -55,7 +55,7 @@ func (v *visor) check() {
 		log.Errorf("Lookup: %v", err)
 		return
 	}
-	log.Debug("Lookup: %d item(s)", len(items))
+	log.Debugf("Lookup: %d item(s)", len(items))
 	services := make(map[string][]server)
 	for _, item := range items {
 		if item.Status == registry.SERVICE_STATUS_PASSING {
