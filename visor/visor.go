@@ -75,12 +75,23 @@ func (v *visor) check() {
 		}
 	}
 	var reload bool
-	hashes := make(map[string]string, len(v.hashes))
+
 	for service, servers := range services {
+		if len(servers) == 0 {
+			continue
+		}
+		switch {
+		case len(servers) == 0:
+			continue
+		case len(servers) == 1:
+			servers[0].Backup = false
+		}
 		hash := makeHash(servers)
-		if old, found := v.hashes[service]; !found || hash != old {
+		old, found := v.hashes[service]
+		log.Debugf("Service [%s]: hash=%s, old=%s, found=%t", service, hash, old, found)
+		if !found || hash != old {
 			if err := v.makeConfig(service, servers); err == nil {
-				hashes[service] = hash
+				v.hashes[service] = hash
 				reload = true
 			}
 		} else {
@@ -88,11 +99,7 @@ func (v *visor) check() {
 		}
 	}
 	if reload {
-		if err := v.reloadNginx(); err == nil {
-			for service, hash := range hashes {
-				v.hashes[service] = hash
-			}
-		}
+		v.reloadNginx()
 	}
 }
 
