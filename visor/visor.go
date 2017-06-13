@@ -61,16 +61,18 @@ func (v *visor) check() {
 		if item.Status == registry.SERVICE_STATUS_PASSING {
 			log.Debugf("[%s] append: address=%s, port=%d, weight=%d", item.Name, item.Address, item.Port, serverWeight(&item))
 			services[item.Name] = append(services[item.Name], server{
-				Host:   item.Address,
-				Port:   item.Port,
-				Weight: serverWeight(&item),
+				Host:       item.Address,
+				Port:       item.Port,
+				Weight:     serverWeight(&item),
+				Datacenter: item.Datacenter,
 			})
 		} else {
 			log.Debugf("[%s] backup: address=%s, port=%d", item.Name, item.Address, item.Port)
 			services[item.Name] = append(services[item.Name], server{
-				Host:   item.Address,
-				Port:   item.Port,
-				Backup: true,
+				Host:       item.Address,
+				Port:       item.Port,
+				Backup:     true,
+				Datacenter: item.Datacenter,
 			})
 		}
 	}
@@ -197,8 +199,9 @@ func makeHash(servers []server) string {
 }
 
 type server struct {
-	Host   string
-	Port   int
-	Weight int
-	Backup bool
+	Host       string
+	Port       int
+	Weight     int
+	Backup     bool
+	Datacenter string
 }
