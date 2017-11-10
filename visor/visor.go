@@ -126,8 +126,16 @@ func (v *visor) makeConfig(service string, servers []server) error {
 		log.Errorf("Could not open configuration file [%s]: %v", config, err)
 		return err
 	}
-
-	if err := tpl.ExecuteWriter(pongo2.Context{"servers": servers}, cnf); err != nil {
+	var countOfLiveServers int
+	for _, server := range servers {
+		if !server.Backup {
+			countOfLiveServers++
+		}
+	}
+	if err := tpl.ExecuteWriter(pongo2.Context{
+		"servers":               servers,
+		"count_of_live_servers": countOfLiveServers,
+	}, cnf); err != nil {
 		log.Errorf("Could not write to configuration file [%s]: %v", config, err)
 		return err
 	}
